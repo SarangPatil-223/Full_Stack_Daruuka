@@ -1,0 +1,10 @@
+{
+  "frontend/**/*.{js,jsx,ts,tsx}": [
+    "npm run lint --prefix frontend",
+    "npm run format --prefix frontend"
+  ],
+  "backend/**/*.py": [
+    "backend/venv/Scripts/ruff check --fix",
+    "backend/venv/Scripts/black"
+  ]
+}
