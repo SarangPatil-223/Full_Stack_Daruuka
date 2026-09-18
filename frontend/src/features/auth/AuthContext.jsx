@@ -1,25 +1,11 @@
 import React, { createContext, useCallback, useContext, useEffect, useState } from 'react';
 import { apiClient } from '../../services/apiClient';
 
-export interface AuthUser {
-  id: string;
-  email: string;
-  full_name: string | null;
-}
+const AuthContext = createContext(undefined);
 
-interface AuthContextType {
-  user: AuthUser | null;
-  token: string | null;
-  login: (token: string) => void;
-  logout: () => void;
-  isLoading: boolean;
-}
-
-const AuthContext = createContext<AuthContextType | undefined>(undefined);
-
-export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [user, setUser] = useState<AuthUser | null>(null);
-  const [token, setToken] = useState<string | null>(localStorage.getItem('token'));
+export const AuthProvider = ({ children }) => {
+  const [user, setUser] = useState(null);
+  const [token, setToken] = useState(localStorage.getItem('token'));
   const [isLoading, setIsLoading] = useState(!!localStorage.getItem('token'));
 
   // useCallback ensures stable identity so useEffect dependency is correct
@@ -29,7 +15,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     setUser(null);
   }, []);
 
-  const login = useCallback((newToken: string) => {
+  const login = useCallback((newToken) => {
     localStorage.setItem('token', newToken);
     setToken(newToken);
   }, []);
@@ -44,7 +30,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     setIsLoading(true);
 
     apiClient
-      .get<AuthUser>('/auth/me')
+      .get('/auth/me')
       .then((res) => {
         if (!cancelled) setUser(res.data);
       })
@@ -67,7 +53,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   );
 };
 
-export const useAuth = (): AuthContextType => {
+export const useAuth = () => {
   const context = useContext(AuthContext);
   if (context === undefined) {
     throw new Error('useAuth must be used within an AuthProvider');

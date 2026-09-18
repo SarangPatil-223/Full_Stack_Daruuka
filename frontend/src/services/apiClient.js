@@ -1,4 +1,4 @@
-import axios, { AxiosError } from 'axios';
+import axios from 'axios';
 
 export const apiClient = axios.create({
   baseURL: import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000/api/v1',
@@ -17,7 +17,7 @@ apiClient.interceptors.request.use((config) => {
 // On 401, clear token and redirect to login — prevents silent infinite loops
 apiClient.interceptors.response.use(
   (response) => response,
-  (error: AxiosError) => {
+  (error) => {
     if (error.response?.status === 401) {
       localStorage.removeItem('token');
       // Navigate without React Router (interceptor is outside component tree)

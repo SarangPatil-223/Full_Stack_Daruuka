@@ -1,12 +1,6 @@
 import React from 'react';
 
-interface EmptyStateProps {
-  title: string;
-  description?: string;
-  action?: React.ReactNode;
-}
-
-export const EmptyState: React.FC<EmptyStateProps> = ({ title, description, action }) => (
+export const EmptyState = ({ title, description, action }) => (
   <div
     role="status"
     style={{
@@ -17,7 +11,14 @@ export const EmptyState: React.FC<EmptyStateProps> = ({ title, description, acti
       color: 'var(--color-text-secondary)',
     }}
   >
-    <p style={{ fontSize: 'var(--text-base)', fontWeight: 'var(--fw-medium)', color: 'var(--color-text)', marginBottom: description ? 'var(--sp-2)' : 'var(--sp-4)' }}>
+    <p
+      style={{
+        fontSize: 'var(--text-base)',
+        fontWeight: 'var(--fw-medium)',
+        color: 'var(--color-text)',
+        marginBottom: description ? 'var(--sp-2)' : 'var(--sp-4)',
+      }}
+    >
       {title}
     </p>
     {description && (
@@ -27,22 +28,22 @@ export const EmptyState: React.FC<EmptyStateProps> = ({ title, description, acti
   </div>
 );
 
-interface LoadingStateProps {
-  message?: string;
-}
-
-export const LoadingState: React.FC<LoadingStateProps> = ({ message = 'Loading…' }) => (
-  <div role="status" aria-live="polite" style={{ padding: 'var(--sp-10)', textAlign: 'center', color: 'var(--color-text-secondary)', fontSize: 'var(--text-sm)' }}>
+export const LoadingState = ({ message = 'Loading…' }) => (
+  <div
+    role="status"
+    aria-live="polite"
+    style={{
+      padding: 'var(--sp-10)',
+      textAlign: 'center',
+      color: 'var(--color-text-secondary)',
+      fontSize: 'var(--text-sm)',
+    }}
+  >
     <span aria-label={message}>{message}</span>
   </div>
 );
 
-interface ErrorStateProps {
-  message: string;
-  onRetry?: () => void;
-}
-
-export const ErrorState: React.FC<ErrorStateProps> = ({ message, onRetry }) => (
+export const ErrorState = ({ message, onRetry }) => (
   <div
     role="alert"
     style={{

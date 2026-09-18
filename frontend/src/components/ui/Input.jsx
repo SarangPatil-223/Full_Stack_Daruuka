@@ -1,12 +1,6 @@
 import React from 'react';
 
-interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
-  label: string;
-  error?: string;
-  required?: boolean;
-}
-
-export const Input: React.FC<InputProps> = ({ label, error, id, required, ...props }) => {
+export const Input = ({ label, error, id, required, ...props }) => {
   const inputId = id || label.toLowerCase().replace(/\s+/g, '-');
   return (
     <div className="field">
@@ -24,6 +18,7 @@ export const Input: React.FC<InputProps> = ({ label, error, id, required, ...pro
         required={required}
         {...props}
       />
+
       {error && (
         <span id={`${inputId}-error`} className="field__error" role="alert">
           {error}

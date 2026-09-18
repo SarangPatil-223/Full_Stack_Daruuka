@@ -1,8 +1,6 @@
 import React from 'react';
 
-type StatusVariant = 'healthy' | 'warning' | 'critical' | 'info' | 'neutral';
-
-const STATUS_MAP: Record<string, StatusVariant> = {
+const STATUS_MAP = {
   Active: 'healthy',
   Healthy: 'healthy',
   Monitoring: 'info',
@@ -15,12 +13,7 @@ const STATUS_MAP: Record<string, StatusVariant> = {
   Paused: 'neutral',
 };
 
-interface BadgeProps {
-  label: string;
-  variant?: StatusVariant;
-}
-
-export const Badge: React.FC<BadgeProps> = ({ label, variant }) => {
+export const Badge = ({ label, variant }) => {
   const resolved = variant ?? STATUS_MAP[label] ?? 'neutral';
   return (
     <span className={`badge badge--${resolved}`} aria-label={`Status: ${label}`}>

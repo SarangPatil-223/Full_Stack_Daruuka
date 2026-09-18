@@ -9,7 +9,7 @@ const NAV_ITEMS = [
   { to: '/map', label: 'Map / Sites', icon: Map },
 ];
 
-export const Sidebar: React.FC = () => {
+export const Sidebar = () => {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
 
@@ -21,15 +21,34 @@ export const Sidebar: React.FC = () => {
   return (
     <aside className="app-sidebar" aria-label="Main navigation">
       {/* Brand */}
-      <div style={{ padding: 'var(--sp-5) var(--sp-4)', borderBottom: '1px solid var(--color-border)' }}>
-        <span style={{ fontWeight: 'var(--fw-semibold)', fontSize: 'var(--text-sm)', letterSpacing: '0.02em', color: 'var(--color-primary)' }}>
+      <div
+        style={{
+          padding: 'var(--sp-5) var(--sp-4)',
+          borderBottom: '1px solid var(--color-border)',
+        }}
+      >
+        <span
+          style={{
+            fontWeight: 'var(--fw-semibold)',
+            fontSize: 'var(--text-sm)',
+            letterSpacing: '0.02em',
+            color: 'var(--color-primary)',
+          }}
+        >
           DARUKAA.EARTH
         </span>
       </div>
 
       {/* Navigation */}
       <nav style={{ flex: 1, padding: 'var(--sp-3) var(--sp-2)' }}>
-        <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 'var(--sp-1)' }}>
+        <ul
+          style={{
+            listStyle: 'none',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 'var(--sp-1)',
+          }}
+        >
           {NAV_ITEMS.map(({ to, label, icon: Icon, end }) => (
             <li key={to}>
               <NavLink
@@ -60,7 +79,16 @@ export const Sidebar: React.FC = () => {
       {/* User + Logout */}
       <div style={{ padding: 'var(--sp-4)', borderTop: '1px solid var(--color-border)' }}>
         {user && (
-          <div style={{ fontSize: 'var(--text-xs)', color: 'var(--color-text-secondary)', marginBottom: 'var(--sp-3)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+          <div
+            style={{
+              fontSize: 'var(--text-xs)',
+              color: 'var(--color-text-secondary)',
+              marginBottom: 'var(--sp-3)',
+              overflow: 'hidden',
+              textOverflow: 'ellipsis',
+              whiteSpace: 'nowrap',
+            }}
+          >
             {user.email}
           </div>
         )}
